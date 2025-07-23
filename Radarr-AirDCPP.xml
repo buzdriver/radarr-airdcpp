@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Container>
-  <Name>Radarr-AirDCPP-test</Name>
+  <Name>Radarr-AirDCPP</Name>
   <Repository>buzdriver/radarr-airdcpp:latest</Repository>
   <Network>bridge</Network>
   <MyIP/>
