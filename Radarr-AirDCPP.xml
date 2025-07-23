@@ -10,6 +10,7 @@
   <Project>https://hub.docker.com/repository/docker/buzdriver/radarr-airdcpp</Project>
   <Overview>Radarr with AirDC++ index- and downloader</Overview>
   <Category>Media</Category>
+  <WebUI>http://[IP]:[PORT:7878]</WebUI>
 
   <!-- Ports -->
   <Config Name="WEBUI_PORT" Target="7878" Default="7878" Description="WebUI Port" Type="Port" Display="always" />
