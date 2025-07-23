@@ -1,0 +1,38 @@
+FROM ghcr.io/linuxserver/baseimage-ubuntu:focal
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV XDG_CONFIG_HOME="/config/xdg"
+
+# Install dependencies
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        curl \
+        jq \
+        libicu66 \
+        libmediainfo0v5 \
+        sqlite3 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Download and install Radarr-AirDCPP
+RUN echo "**** Downloading Radarr-AirDCPP ****" && \
+    RADARR_URL=$(curl -s https://api.github.com/repos/nls44/Radarr-AirDCPP/releases/latest | \
+        jq -r '.assets[].browser_download_url' | \
+        grep -i 'Linux-x64.tar.gz' | head -n 1) && \
+    if [ -z "$RADARR_URL" ]; then echo "No valid Radarr URL found!" && exit 1; fi && \
+    echo "Downloading from $RADARR_URL" && \
+    mkdir -p /app/radarr/bin && \
+    curl -L -o /tmp/radarr.tar.gz "$RADARR_URL" && \
+    tar -xzf /tmp/radarr.tar.gz -C /app/radarr/bin --strip-components=1 && \
+    rm -rf /tmp/*
+
+# Set up s6 service to start Radarr
+RUN mkdir -p /etc/services.d/radarr && \
+    printf '#!/bin/sh\nexec /app/radarr/bin/Radarr --nobrowser --data=/config\n' > /etc/services.d/radarr/run && \
+    chmod +x /etc/services.d/radarr/run
+
+# Copy any custom files
+COPY root/ /
+
+# Expose port and mount volume
+EXPOSE 7878
+VOLUME /config
