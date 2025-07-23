@@ -17,7 +17,7 @@
   <!-- Paths (Volumes) -->
   <Config Name="CONFIG_PATH" Target="/config" Default="/mnt/cache/appdata/Radarr-AirDCPP-docker" Mode="rw" Description="Radarr config path" Type="Path" Display="always" />
   <Config Name="DOWNLOADS_PATH" Target="/Share/Downloads" Default="/mnt/user/Media/Downloads" Mode="rw" Description="AirDCPP downloads path" Type="Path" Display="always" />
-  <Config Name="RAR2FS_PATH" Target="/mnt/rar2fs" Default="/mnt/cache/appdata/rar2fs/unraid/#MOVIES" Mode="ro" Description="rar2fs extracted movie path" Type="Path" Display="always" />
+  <Config Name="RAR2FS_PATH" Target="/mnt/rar2fs" Default="/mnt/cache/appdata/rar2fs/unraid/#MOVIES" Mode="rw" Description="rar2fs extracted movie path" Type="Path" Display="always" />
   <Config Name="SYMLINK_PATH" Target="/mnt/symlink" Default="/mnt/user/Media/SymLink" Mode="rw" Description="Radarr symlink output path" Type="Path" Display="always" />
   <Config Name="MOVIES_PATH" Target="/mnt/movies" Default="/mnt/user/Media/#MOVIES" Mode="rw" Description="Movies library path" Type="Path" Display="always" />
 
